@@ -1,0 +1,15 @@
+lockfileVersion: 5.4
+
+specifiers:
+  ts-toolbelt: ^9.6.0
+
+dependencies:
+  ts-toolbelt: registry.npmmirror.com/ts-toolbelt/9.6.0
+
+packages:
+
+  registry.npmmirror.com/ts-toolbelt/9.6.0:
+    resolution: {integrity: sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/ts-toolbelt/-/ts-toolbelt-9.6.0.tgz}
+    name: ts-toolbelt
+    version: 9.6.0
+    dev: false

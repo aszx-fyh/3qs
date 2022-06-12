@@ -1,4 +1,13 @@
 {
+  "name": "3qs",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "preinstall": "node preinstall.js"
+  },
   "dependencies": {
     "ts-toolbelt": "^9.6.0"
   }
