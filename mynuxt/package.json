@@ -21,7 +21,7 @@
     "cross-env": "^5.2.0",
     "koa": "^2.6.2",
     "koa-router": "^7.4.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "nuxt": "^2.8.1",
     "sass-loader": "^7.1.0",
     "socket.io": "^2.2.0",
