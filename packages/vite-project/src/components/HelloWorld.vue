@@ -1,52 +1,25 @@
 <script setup lang="ts">
 import { ref, } from 'vue'
+import { Comp1 } from "./Icon";
+import { QPromise } from "../promise";
+const p = new Promise((resolve,reject)=>{
+  console.log('p1')
+  reject(1)
+}).then(res=>{
+  console.log('p3')
+  return res+1;
+}).catch((res)=>{
+  console.log('p4')
+  return res+3;
+})
+console.log('p2',p)
 
-defineProps<{ msg: string }>()
-
-const count = ref(10)
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
-
-  <p>
-    Recommended IDE setup:
-    <a href="https://code.visualstudio.com/" target="_blank">VS Code</a>
-    +
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
-  </p>
-
-  <p>See <code>README.md</code> for more information.</p>
-
-  <p>
-    <a href="https://vitejs.dev/guide/features.html" target="_blank">
-      Vite Docs
-    </a>
-    |
-    <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Docs</a>
-  </p>
-
-  <button type="button" @click="count++">count is: {{ count }}</button>
-  <p>
-    Edit
-    <code>components/HelloWorld.vue</code> to test hot module replacement.
-  </p>
+  <Comp1></Comp1> 
+  
 </template>
 
 <style scoped>
-a {
-  color: #42b983;
-}
-
-label {
-  margin: 0 0.5em;
-  font-weight: bold;
-}
-
-code {
-  background-color: #eee;
-  padding: 2px 4px;
-  border-radius: 4px;
-  color: #304455;
-}
 </style>
