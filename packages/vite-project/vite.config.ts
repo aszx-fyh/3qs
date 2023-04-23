@@ -4,5 +4,11 @@ import vuejsx from '@vitejs/plugin-vue-jsx'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(),vuejsx()]
+  base:"/common/",
+  plugins: [vue(),vuejsx()],
+  css:{
+    preprocessorOptions:{
+      scss:{}
+    }
+  }
 })

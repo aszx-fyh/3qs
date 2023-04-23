@@ -28,5 +28,6 @@ sendEvent("SIGN_OUT",{});
 sendEvent("LOG_IN",{
   userId:123
 });
-sendEvent("LOG_IN",{});
+sendEvent("LOG_IN",{
+});
 sendEvent("LOG_IN");

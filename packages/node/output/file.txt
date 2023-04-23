@@ -1,1 +1,0 @@
-write file data 11 汉字

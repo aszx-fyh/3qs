@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fetch</title>
+  </head>
+  <body>
+    <section>
+      <h2>表单提交#content#</h2>
+      <form action="/fetch">
+        <div>
+          <label for="username">用户名</label>
+          <input type="text" name="username" id="username" />
+        </div>
+        <div>
+          <label for="password">密码</label>
+          <input type="password" name="password" id="password" />
+        </div>
+        <input type="hidden" name="api_name" value="login" />
+        <button type="submit">登录</button>
+      </form>
+    </section>
+    <section>
+      <h2>fetch</h2>
+      <button type="button" id="btn_json" data-type="application/json">
+        json
+      </button>
+      <button type="button" id="btn_png" data-type="image/png">png</button>
+      <div id="content_json"></div>
+      <template id="temp_json">
+        <div>
+          <span>#id#</span>
+          <span>#name#</span>
+        </div>
+      </template>
+    </section>
+    <!-- TODO web component/shadow/slot -->
+    <script>
+      async function fetchWithContentType() {
+        fetch('/fetch?api_name=province', {
+          method: 'get',
+          headers: {
+            'Content-Type': this.dataset.type,
+          },
+        }).then(async (res) => {
+          const content = document.getElementById('content_json')
+          const responseContentType = res.headers.get('content-type')
+          if (responseContentType === 'image/png') {
+            const image = new Image()
+            var objectURL = URL.createObjectURL(await res.blob())
+            image.src = objectURL
+            content.append(image)
+          } else if (responseContentType === 'application/json') {
+            const list = await res.json()
+            const temp = document.getElementById('temp_json').innerHTML
+            content.innerHTML = list
+              .map((el) => {
+                return Object.keys(el).reduce((str, prop) => {
+                  return str.replace(`#${prop}#`, el[prop])
+                }, temp)
+              })
+              .join('')
+          }
+        })
+      }
+      document
+        .getElementById('btn_json')
+        .addEventListener('click', fetchWithContentType)
+      document
+        .getElementById('btn_png')
+        .addEventListener('click', fetchWithContentType)
+    </script>
+  </body>
+</html>
