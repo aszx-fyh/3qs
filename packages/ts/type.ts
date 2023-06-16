@@ -1,43 +1,56 @@
-interface User {
-  name:string;
-  age:number;
-  address:string;
+export {};
+interface Person {
+    name: string;
+    age: number;
+    address: {
+        province: string;
+        city: Date;
+    };
 }
 
-type UserUI=Pick<User,'address'|'age'>
-type UserRecord=Record<keysUser,number>
-type keysUser=keyof User
-type ss=ArrayLike<User>
-interface ChildUser extends User{}
-type sss=Exclude<keysUser,'address'>
-type ssss=Extract<keysUser,'address'>
-type sssss=keyof any;
-let s:UserUI={
-  address:'',
-  age:2
-}
-let ss:User;
-ss={
-  name:'',
-  age:1,
-  address:''
-}
-type T1<T>={
-  [P in keyof T]:number;
-}
-type T2=T1<any>
-let  sys=Symbol('key')
-let t2:T2={
-  3:3,
-  "d":2222,
-  [sys]:44
-}
+type PersonNameType = Person["name"];
+type PersonAddress = Pick<Person, "address">;
+type PersonAddressType = Person["address"];
+type PersonAddressKeys = keyof PersonAddressType;
+type PersonAddressTypeNew = {
+    [k in PersonAddressKeys]: string;
+} & {
+    area: string;
+    code: number;
+};
 
-const s1 = Symbol("liao");
-const s2 = Symbol("liao");
-type Er=string&number;
-type ErR=any|1;
-type Ee=any&never;
+type GetAddressProvinceType<T> = T extends { address: { province: infer R } } ? R : never;
+type AddressProvinceType = GetAddressProvinceType<Person>;
+type s = {
+    [k in PersonAddressKeys]: {
+        [k1 in k]: PersonAddressType[k1];
+    };
+}[PersonAddressKeys];
 
+type Template = {
+    aaa: string;
+    bbb: {
+        cc: {
+            dd: string;
+        };
+    };
+    eee: {
+        ff: string;
+        gg: number;
+    };
+    kk: Date;
+};
+// 联合类型参与类型运算
+type ss = `xx.${2 | "d"}`;
+type DFS<Obj> = {
+    [key in keyof Obj]: key extends string
+        ? Obj[key] extends Record<string, any>
+            ? `${key}.${DFS<Obj[key]>}`
+            : key
+        : never;
+}[keyof Obj];
 
+// "aaa" | "bbb" |"bbb.cc.dd"
+type res = DFS<Template>;
 
+let s: res = "eee.ff";
