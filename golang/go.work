@@ -3,4 +3,6 @@ go 1.19
 use (
 	./mod1
 	./mod2
+	./data_race
+	./bad_demo
 )

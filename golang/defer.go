@@ -9,8 +9,22 @@ func function(index int, value int) int {
 	return index
 }
 
-func main() {
-	defer function(1, function(3, 0))
-	defer function(2, function(4, 0))
+func adr(a int) (c int) {
+	defer func() {
+		c++
+		fmt.Println(88888, c)
+	}()
+	defer func() {
+		c += 8
+		fmt.Println(999, c)
+	}()
+	a++
+	c = a
+	return c
+}
 
+func main() {
+	var b, a int
+	b = adr(a)
+	fmt.Println(a, b)
 }
