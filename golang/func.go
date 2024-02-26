@@ -27,8 +27,7 @@ func maxMin(nums ...int) (max int, min int, err error) {
 	}
 	return max, min, nil
 }
-
-func main() {
+func ex1() {
 	var maxNum, minNum int
 	// 可以选择处理错误, 也可以选择不处理，直接丢弃掉
 	maxNum, minNum, _ = maxMin(4, 2, 3)
@@ -39,3 +38,9 @@ func main() {
 		fmt.Println(err)
 	}
 }
+func main() {
+	//ex1()
+	ap(1)
+}
+
+func ap(a int) int

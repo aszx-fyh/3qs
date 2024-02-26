@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func function(index int, value int) int {
 
@@ -22,9 +24,16 @@ func adr(a int) (c int) {
 	c = a
 	return c
 }
-
+func apk() {
+	defer fmt.Printf("defer")
+	defer func() {
+		fmt.Printf("defer11")
+	}()
+	fmt.Printf("defer112222")
+}
 func main() {
 	var b, a int
 	b = adr(a)
 	fmt.Println(a, b)
+	apk()
 }

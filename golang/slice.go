@@ -28,4 +28,9 @@ func main() {
 	s1 := []int{1, 2, 4}
 	s2 := append(s1, s1...)
 	fmt.Println(s2)
+
+	var contentIds []uint64
+	contentIds = append(contentIds, 111)
+	fmt.Println(contentIds)
+
 }
