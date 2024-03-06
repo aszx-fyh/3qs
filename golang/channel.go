@@ -74,11 +74,11 @@ func main() {
 	// ex3()
 	// ex4()
 	// ex5()
-	// ex6()
+	ex6()
 	// ex7()
 	// ex8()
 	// ex9()
-	ex10()
+	// ex10()
 }
 
 func ex5() {
@@ -179,7 +179,7 @@ func ex6() {
 
 	}()
 	wg.Wait()
-	fmt.Println(str)
+	fmt.Println("print:", str)
 }
 
 func ex7() {

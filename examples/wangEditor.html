@@ -1,0 +1,172 @@
+<link href="https://unpkg.com/@wangeditor/editor@latest/dist/css/style.css" rel="stylesheet" />
+<style>
+    #editor—wrapper {
+        border: 1px solid #ccc;
+        z-index: 100; /* 按需定义 */
+    }
+    #toolbar-container {
+        border-bottom: 1px solid #ccc;
+    }
+    #editor-container {
+        height: 500px;
+    }
+</style>
+<div id="editor—wrapper">
+    <div id="toolbar-container"><!-- 工具栏 --></div>
+    <div id="editor-container"><!-- 编辑器 --></div>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://unpkg.com/@wangeditor/editor@latest/dist/index.js"></script>
+<script>
+    const { createEditor, createToolbar, Boot } = window.wangEditor;
+
+    // Extend menu
+    class MyMenu {
+        constructor() {
+            this.title = "自定义菜单";
+            this.iconSvg = "";
+            this.tag = "button";
+            this.showModal = true;
+            this.modalWidth = 300;
+        }
+        getValue(editor) {
+            return "";
+        }
+        isActive(editor) {
+            return false; // or true
+        }
+        isDisabled(editor) {
+            return false; // or true
+        }
+        exec(editor, value) {
+            // do nothing 什么都不用做
+        }
+        getModalPositionNode(editor) {
+            return null; // modal 依据选区定位
+        }
+        getModalContentElem(editor) {
+            const $container = $("<div></div>");
+
+            const inputId = `input-${Math.random().toString(16).slice(-8)}`;
+            const buttonId = `button-${Math.random().toString(16).slice(-8)}`;
+
+            const $inputContainer = $(`<label class="babel-container">
+                <span>菜单内容</span>
+                <input type="text" id="${inputId}" value="hello world">
+              </label>`);
+            const $buttonContainer = $(`<div class="button-container">
+                <button id="${buttonId}">insert text</button>
+              </div>`);
+
+            $container.append($inputContainer).append($buttonContainer);
+
+            $container.on("click", `#${buttonId}`, (e) => {
+                e.preventDefault();
+
+                const text = $(`#${inputId}`).val();
+                if (!text) return;
+
+                editor.restoreSelection(); // 恢复选区
+                editor.insertText(text);
+                editor.insertText(" ");
+            });
+
+            setTimeout(() => {
+                $(`#${inputId}`).focus();
+            });
+            console.log(11111, $container[0]);
+            return $container[0];
+
+            // PS：也可以把 $container 缓存下来，这样不用每次重复创建、重复绑定事件，优化性能
+        }
+    }
+    class MyMenuClass {
+        constructor() {
+            this.title = "My Select Menu";
+            this.tag = "select";
+            this.width = 60;
+        }
+
+        getOptions(editor) {
+            const options = [
+                {
+                    value: "beijing",
+                    text: "北京",
+                    styleForRenderMenuList: { "font-size": "32px", "font-weight": "bold" },
+                },
+                { value: "shanghai", text: "上海", selected: true },
+                { value: "shenzhen", text: "深圳" },
+            ];
+            return options;
+        }
+
+        getValue(editor) {
+            return "shanghai"; // 匹配 options 其中一个 value
+        }
+        isActive(editor) {
+            return false; // or true
+        }
+        isDisabled(editor) {
+            return false; // or true
+        }
+        exec(editor, value) {
+            editor.insertText(value); // value 即 this.getValue(editor) 的返回值
+            editor.insertText(" ");
+        }
+    }
+
+    const myMenuConf1 = {
+        key: "myMenu1",
+        factory() {
+            return new MyMenuClass();
+        },
+    };
+    const myMenuConf = {
+        key: "myMenu",
+        factory() {
+            return new MyMenu();
+        },
+    };
+    Boot.registerMenu(myMenuConf);
+    Boot.registerMenu(myMenuConf1);
+
+    const editorConfig = {
+        placeholder: "请输入内容",
+        onChange(editor) {
+            const html = editor.getHtml();
+            console.log("editor content", html);
+            // 也可以同步到 <textarea>
+        },
+        maxLength: 20,
+        onMaxLength(editor) {
+            alert("Trigger maxlength callback");
+        },
+        customAlert: (s, t) => {
+            // TS 语法
+            console.log("alert", s, t);
+        },
+    };
+
+    const editor = (window.editor = createEditor({
+        selector: "#editor-container",
+        html: "<p></p>",
+        config: editorConfig,
+        mode: "default", // or 'simple'
+    }));
+
+    const toolbarConfig = {
+        // toolbarKeys: ["myMenu", "myMenu1"],
+        insertKeys: {
+            index: 0,
+            keys: ["myMenu", "myMenu1"], // show menu in toolbar
+        },
+    };
+
+    const toolbar = (window.toolbar = createToolbar({
+        editor,
+        selector: "#toolbar-container",
+        config: toolbarConfig,
+        mode: "default", // or 'simple'
+    }));
+    console.log(toolbar.getConfig());
+</script>

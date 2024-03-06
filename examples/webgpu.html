@@ -14,6 +14,8 @@
                 if (!device) {
                     fail("need a browser that supports WebGPU");
                     return;
+                } else {
+                    console.log(navigator.gpu);
                 }
             }
             main();
