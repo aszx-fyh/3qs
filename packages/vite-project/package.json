@@ -8,8 +8,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "babel-runtime": "^6.26.0",
     "vant": "^3.5.0",
-    "vue": "^3.2.25"
+    "vue": "^3.2.25",
+    "vue-markdown": "^2.2.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",

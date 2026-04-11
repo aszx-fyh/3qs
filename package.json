@@ -9,11 +9,24 @@
     "preinstall": "node preinstall.js"
   },
   "dependencies": {
+    "@leafer-in/editor": "^1.9.12",
+    "@leafer-in/export": "^1.9.12",
+    "@leafer-in/resize": "^1.9.12",
+    "@leafer-in/viewport": "^1.9.12",
+    "@leafer-ui/core": "^1.9.12",
+    "@leafer-ui/draw": "^1.9.12",
+    "@leafer/core": "^1.9.12",
+    "@logicflow/core": "^1.2.22",
+    "@logicflow/extension": "^1.2.22",
     "@orillusion/core": "^0.7.1",
     "@vitejs/plugin-vue-jsx": "^1.3.10",
     "fp-ts": "^2.16.1",
+    "github-markdown-css": "^5.6.1",
+    "leafer-game": "^1.9.12",
+    "leafer-ui": "^1.9.12",
     "ts-toolbelt": "^9.6.0",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.4",
+    "vue-markdown": "^2.2.4"
   },
   "devDependencies": {
     "@types/node": "^18.11.15",

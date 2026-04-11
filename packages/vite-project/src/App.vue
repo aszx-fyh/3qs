@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import city from './city.json'
+import HelloWorld from "./components/HelloWorld.vue";
+import city from "./city.json";
+import Markdown from "./components/Markdown.vue";
 // import logo from "./assets/logo.png?raw";
 </script>
 
 <template>
-  {{city }}
+  {{ city }}
   <!-- {{logo }} -->
   <img alt="Vue logo" src="./assets/logo.png" />
   <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
+  <Markdown></Markdown>
 </template>
 
 <style>

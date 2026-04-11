@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaferjs</title>
+</head>
+
+<body>
+    <script type="importmap">
+        {
+            "imports": {
+                "leafer-ui": "/node_modules/leafer-ui/dist/web.module.js"
+            }
+        }
+    </script>
+    <script type="module" >
+        import { Leafer, Rect,Star,Ellipse, Image,Group } from "leafer-ui";
+        // #创建元素 [标准创建]
+        const leafer = new Leafer({ view: window })
+
+        const rect = new Rect({
+            x: 100,
+            y: 100,
+            width: 100,
+            height: 100,
+            fill: '#32cd79', // 背景色
+            draggable: true
+        })
+
+        leafer.add(rect)
+
+        // #创建元素 [使用 tag]
+
+leafer.add({
+    tag: 'Rect', // 必须要有类名tag
+    x: 300,
+    y: 100,
+    width: 100,
+    height: 100,
+    fill: '#32cd79'
+})
+
+const rect1 = new Rect({
+    width: 100,
+    height: 100,
+    fill: 'red',
+    cornerRadius: [0, 40, 20, 40]
+})
+
+leafer.add(rect1)
+const star = new Star({
+    x:300,y:300,
+    width: 100,
+    height: 100,
+    innerRadius: 0.5,
+    corners: 8,
+    cornerRadius: 5,
+    fill: '#32cd79'
+})
+
+leafer.add(star)
+
+// #遮罩功能 [将圆环设为遮罩]
+const group = new Group({ x: 100, y: 300 })
+
+const mask = new Ellipse({
+    width: 100,
+    height: 100,
+    innerRadius: 0.5,
+    fill: 'red',
+    mask: true
+})
+
+const image = new Image({
+    width: 100,
+    height: 100,
+    url: './image/leafer.jpg'
+})
+
+leafer.add(group)
+
+group.add([mask, image])   
+
+// #擦除功能 [将圆环设为橡皮擦]
+
+
+const group1 = new Group({ x: 200, y: 500, draggable: true })
+
+const image1 = new Image({
+    width: 100,
+    height: 100,
+    cornerRadius: 30,
+    url: './image/leafer.jpg'
+})
+
+const eraser = new Ellipse({
+    x: 15,
+    y: 15,
+    width: 70,
+    height: 70,
+    innerRadius: 0.5,
+    fill: 'black',
+    eraser: true,
+    draggable: true
+})
+
+leafer.add(group1)
+
+group1.add([image1, eraser])  
+    </script>
+</body>
+
+</html>
